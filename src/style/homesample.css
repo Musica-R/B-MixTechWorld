@@ -1,0 +1,213 @@
+/* ---- Featured work: color tokens (scoped) ---- */
+.featured-work {
+  --fw-bg-deep: #050d1a;
+  --fw-bg-panel: #0d1c30;
+  --fw-cyan: #22d3ee;
+  --fw-cyan-strong: #06b6d4;
+  --fw-glow: rgba(34, 211, 238, 0.35);
+  --fw-border: rgba(34, 211, 238, 0.18);
+  --fw-text: #f1f5f9;
+  --fw-muted: #94a3b8;
+
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(5, 13, 26, 0.88), rgba(5, 13, 26, 0.96)),
+    url("../assets/bg.png") center / cover no-repeat;
+  padding: clamp(60px, 8vw, 110px) 0;
+  color: var(--fw-text);
+  overflow: hidden;
+}
+
+.featured-work-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: clamp(30px, 5vw, 50px);
+}
+
+.featured-work .eyebrow-line {
+  color: var(--fw-cyan);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.featured-work h2 {
+  color: var(--fw-text);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-top: 10px;
+}
+
+.featured-work .metal-text {
+  color: var(--fw-cyan);
+}
+
+.featured-work .btn-ghost {
+  border: 1px solid var(--fw-border);
+  color: var(--fw-cyan);
+  border-radius: 999px;
+  padding: 10px 20px;
+  transition: all 0.25s ease;
+}
+
+.featured-work .btn-ghost:hover {
+  background: var(--fw-glow);
+  border-color: var(--fw-cyan);
+}
+
+/* ---- Carousel shell ---- */
+.featured-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--fw-border);
+  background: rgba(13, 28, 48, 0.6);
+  color: var(--fw-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 2;
+}
+
+.carousel-arrow:hover {
+  background: var(--fw-cyan);
+  color: var(--fw-bg-deep);
+  box-shadow: 0 0 20px var(--fw-glow);
+}
+
+/* ---- Cards (3-slot filmstrip) ---- */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 24px;
+  flex: 1;
+  align-items: center;
+}
+
+.featured-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  background: var(--fw-bg-panel);
+  border: 1px solid var(--fw-border);
+  border-radius: 18px;
+  padding: 18px;
+  cursor: pointer;
+  transform: scale(0.9);
+  opacity: 0.55;
+  transition: transform 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.featured-item.active {
+  transform: scale(1.06);
+  opacity: 1;
+  border-color: var(--fw-cyan);
+  box-shadow: 0 0 40px var(--fw-glow);
+  z-index: 1;
+  cursor: default;
+}
+
+.featured-item.prev,
+.featured-item.next {
+  opacity: 0.6;
+}
+
+.featured-item-media {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+.featured-item-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--fw-cyan), var(--fw-cyan-strong));
+  color: var(--fw-bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.featured-item-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--fw-text);
+}
+
+.featured-item-desc {
+  font-size: 0.9rem;
+  color: var(--fw-muted);
+  line-height: 1.5;
+}
+
+.featured-item-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fw-cyan);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: auto;
+}
+
+/* ---- Dots ---- */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(148, 163, 184, 0.35);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dot.active {
+  background: var(--fw-cyan);
+  width: 22px;
+  border-radius: 6px;
+}
+
+@media (max-width: 800px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .featured-item.prev,
+  .featured-item.next {
+    display: none;
+  }
+  .carousel-arrow {
+    display: none;
+  }
+}

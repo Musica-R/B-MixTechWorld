@@ -1,0 +1,393 @@
+/* =========================================================
+   "What we do" services section — dark glow theme.
+   Scoped colors only (not the site's global light vars),
+   to match the reference screenshot exactly.
+   ========================================================= */
+
+.snapshot-section {
+  --sn-bg-top: #060b10;
+  --sn-bg-bottom: #08141b;
+  --sn-card: rgba(255, 255, 255, 0.035);
+  --sn-card-hover: rgba(255, 255, 255, 0.06);
+  --sn-border: rgba(42, 212, 226, 0.16);
+  --sn-border-hover: rgba(42, 212, 226, 0.55);
+  --sn-cyan: #29d8e6;
+  --sn-cyan-soft: rgba(42, 212, 226, 0.14);
+  --sn-text: #f2fafb;
+  --sn-muted: rgba(223, 240, 243, 0.62);
+
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sn-bg-top) 0%, var(--sn-bg-bottom) 100%);
+  color: var(--sn-text);
+  padding: 96px 0;
+}
+
+.snapshot-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glow blobs + floating squares, matching the reference image's ambience */
+.snapshot-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snapshot-glow-a {
+  top: -180px;
+  right: -160px;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(42, 212, 226, 0.30) 0%, rgba(42, 212, 226, 0) 70%);
+  filter: blur(6px);
+}
+
+.snapshot-glow-b {
+  bottom: -220px;
+  left: -180px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(20, 130, 220, 0.22) 0%, rgba(20, 130, 220, 0) 70%);
+  filter: blur(6px);
+}
+
+.snapshot-square {
+  position: absolute;
+  border: 1px solid rgba(42, 212, 226, 0.35);
+  background: rgba(42, 212, 226, 0.04);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.snapshot-square-1 { width: 26px; height: 26px; left: 4%; top: 30%; }
+.snapshot-square-2 { width: 16px; height: 16px; left: 8%; top: 62%; opacity: 0.7; }
+.snapshot-square-3 { width: 34px; height: 34px; left: 2%; top: 72%; opacity: 0.5; }
+.snapshot-square-4 { width: 18px; height: 18px; right: 6%; top: 8%; opacity: 0.6; }
+
+/* Top row: copy + visual, side by side like the reference */
+.snapshot-top {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.snapshot-eyebrow {
+  color: var(--sn-cyan);
+}
+
+.snapshot-heading {
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 14px;
+  color: var(--sn-text);
+}
+
+.snapshot-heading-accent {
+  background: linear-gradient(90deg, var(--sn-cyan), #7fe9f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.snapshot-top-copy > p {
+  color: var(--sn-muted);
+  margin-top: 18px;
+  max-width: 46ch;
+  font-size: 1.02rem;
+}
+
+.snapshot-cta {
+  margin-top: 26px;
+  border-color: rgba(42, 212, 226, 0.5);
+  color: var(--sn-cyan);
+}
+
+.snapshot-cta:hover {
+  border-color: var(--sn-cyan);
+  background: var(--sn-cyan-soft);
+}
+
+.snapshot-visual {
+  position: relative;
+}
+
+.snapshot-visual-frame {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(42, 212, 226, 0.32);
+  box-shadow: 0 0 46px rgba(31, 216, 228, 0.22), 0 24px 55px rgba(0, 0, 0, 0.55);
+}
+
+.snapshot-visual-frame img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.snapshot-visual-badge {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(6, 14, 18, 0.88);
+  border: 1px solid rgba(42, 212, 226, 0.3);
+  border-radius: 14px;
+  padding: 14px 16px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
+}
+
+.badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--sn-text);
+  white-space: nowrap;
+}
+
+.badge-icon {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--sn-cyan-soft);
+  color: var(--sn-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Service cards */
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.snapshot-card {
+  padding: 26px 24px;
+  border-radius: 14px;
+  border: 1px solid var(--sn-border);
+  background: var(--sn-card);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.snapshot-card:hover {
+  border-color: var(--sn-border-hover);
+  background: var(--sn-card-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+
+.snapshot-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #23d3e2 0%, #1467c9 100%);
+  color: #04141a;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 22px rgba(31, 216, 228, 0.35);
+}
+
+.snapshot-card h3 {
+  font-size: 1.04rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--sn-text);
+}
+
+.snapshot-card > p {
+  color: var(--sn-muted);
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.snapshot-checklist {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.snapshot-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--sn-muted);
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.snapshot-checklist svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--sn-cyan);
+}
+
+.snapshot-link {
+  margin-top: 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--sn-cyan);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.snapshot-link:hover {
+  text-decoration: underline;
+}
+
+.snapshot-mockup {
+  margin-top: 18px;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background: #04090c;
+  border: 1px solid rgba(42, 212, 226, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snapshot-mockup > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-mockup-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(42, 212, 226, 0.18), rgba(0, 0, 0, 0.55));
+}
+
+.video-mockup-ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(42, 212, 226, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sn-cyan);
+}
+
+/* Stats strip */
+.snapshot-stats {
+  margin-top: 44px;
+  padding: 26px 32px;
+  border-radius: 14px;
+  border: 1px solid var(--sn-border);
+  background: var(--sn-card);
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.snapshot-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 200px;
+}
+
+.stat-icon {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sn-cyan);
+  background: var(--sn-cyan-soft);
+}
+
+.stat-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.snapshot-stats .stat-num {
+  color: var(--sn-text);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.snapshot-stats .stat-label {
+  color: var(--sn-muted);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 1100px) {
+  .snapshot-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .snapshot-top {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshot-visual {
+    order: -1;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .snapshot-visual-badge {
+    top: -14px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 620px) {
+  .snapshot-section {
+    padding: 72px 0;
+  }
+
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshot-mockup {
+    aspect-ratio: 16 / 10;
+  }
+
+  .snapshot-visual-badge {
+    position: static;
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .snapshot-stats {
+    flex-direction: column;
+    padding: 22px;
+  }
+}

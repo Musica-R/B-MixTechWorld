@@ -1,0 +1,79 @@
+.service-block { overflow: hidden; }
+
+.service-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(32px, 6vw, 64px);
+  align-items: center;
+}
+
+.service-grid-reverse { grid-template-columns: 1.1fr 0.9fr; }
+.service-grid-reverse .service-copy { order: 1; }
+.service-grid-reverse .service-swatch { order: 2; }
+
+.service-media { border: 1px solid var(--line); overflow: hidden; box-shadow: var(--shadow-sm); }
+.service-media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4/3; }
+
+.service-copy h2 { font-size: clamp(1.7rem, 2.8vw, 2.2rem); margin-top: 14px; }
+.service-copy > p { color: var(--muted); margin-top: 16px; max-width: 52ch; }
+
+.feature-list { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.feature-list li { position: relative; padding-left: 20px; font-size: 0.94rem; color: var(--silver-deep); }
+.feature-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; background: var(--cyan); transform: rotate(45deg); }
+
+.service-link { display: inline-block; margin-top: 26px; font-size: 0.92rem; font-weight: 600; color: var(--cyan); }
+.service-link:hover { color: var(--cyan-deep); }
+
+.service-swatch {
+  border: 1px solid var(--line);
+  background: var(--white);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  aspect-ratio: 4/3;
+  justify-content: center;
+}
+.swatch-row { display: flex; gap: 10px; }
+.swatch { width: 44px; height: 44px; }
+.swatch-type { font-family: var(--font-head); font-weight: 700; font-size: 3rem; color: var(--ink); line-height: 1; }
+.swatch-caption { font-size: 0.82rem; color: var(--muted); }
+
+@media (max-width: 800px) {
+  .service-grid, .service-grid-reverse { grid-template-columns: 1fr; }
+  .service-grid-reverse .service-copy { order: 2; }
+  .service-grid-reverse .service-swatch { order: 1; }
+}
+
+.pricing-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.pricing-inner h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); margin-top: 14px; }
+.pricing-inner p { color: var(--muted); margin-top: 14px; max-width: 52ch; }
+
+@media (max-width: 1024px) {
+  .service-grid, .service-grid-reverse { gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .service-swatch { aspect-ratio: auto; padding: 24px; }
+}
+
+@media (max-width: 520px) {
+  .pricing-inner { flex-direction: column; align-items: flex-start; }
+  .pricing-inner .btn { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 420px) {
+  .feature-list { gap: 10px; }
+  .swatch { width: 36px; height: 36px; }
+}
+
+@media (max-width: 320px) {
+  .swatch-type { font-size: 2.3rem; }
+}

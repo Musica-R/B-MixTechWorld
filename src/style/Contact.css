@@ -1,0 +1,71 @@
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(30px, 6vw, 70px);
+  align-items: start;
+}
+
+.contact-info h2 { font-size: clamp(1.5rem, 2.4vw, 1.9rem); }
+
+.contact-list {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-list li { display: flex; align-items: baseline; gap: 14px; font-size: 1rem; }
+.contact-label { width: 70px; flex-shrink: 0; font-size: 0.78rem; color: var(--muted); }
+.contact-list a { color: var(--ink); font-weight: 600; font-family: var(--font-head); transition: color 0.2s ease; }
+.contact-list a:hover { color: var(--cyan); }
+
+.service-area { margin-top: 32px; padding-top: 26px; border-top: 1px solid var(--line); }
+.service-area p { color: var(--muted); margin-top: 12px; max-width: 44ch; font-size: 0.94rem; }
+
+.quote-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(28px, 4vw, 40px);
+  position: relative;
+}
+.quote-card::before { content: ''; position: absolute; top: 0; left: 0; width: 44px; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--cyan-deep)); }
+.quote-card h3 { font-size: 1.3rem; font-weight: 700; }
+.quote-note { color: var(--muted); font-size: 0.92rem; margin-top: 10px; margin-bottom: 24px; }
+
+.quote-form { display: flex; flex-direction: column; gap: 18px; }
+.quote-form label { display: flex; flex-direction: column; gap: 8px; font-size: 0.86rem; color: var(--muted); }
+.quote-form input, .quote-form select, .quote-form textarea {
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+.quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { border-color: var(--cyan); }
+.quote-form button { margin-top: 6px; justify-content: center; }
+
+.quote-sent p { color: var(--muted); font-size: 0.95rem; margin-bottom: 18px; }
+
+@media (max-width: 1024px) {
+  .contact-grid { gap: 48px; }
+}
+@media (max-width: 860px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .contact-list li { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .contact-label { width: auto; }
+}
+@media (max-width: 420px) {
+  .quote-card { padding: 24px 20px; }
+}
+@media (max-width: 320px) {
+  .contact-list a, .contact-list span { font-size: 0.92rem; }
+}
