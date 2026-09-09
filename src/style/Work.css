@@ -74,6 +74,106 @@
   }
 }
 
+/* ================= What We Do — light card strip above the flip book ================= */
+.whatwedo-section {
+  padding: clamp(40px, 5vw, 56px) 0 0;
+}
+
+.whatwedo-card-wrap {
+  background: var(--white, #f7f9fb);
+  border: 1px solid var(--line, #e7ebf0);
+  border-radius: 20px;
+  padding: clamp(28px, 4vw, 44px) clamp(20px, 4vw, 40px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.eyebrow-dark {
+  color: #0f9db0;
+}
+
+.whatwedo-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+
+.whatwedo-visual {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.whatwedo-visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.whatwedo-list-col h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.whatwedo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.whatwedo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line, #e7ebf0);
+}
+
+.whatwedo-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.whatwedo-icon {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f9db0;
+  background: rgba(15, 157, 176, 0.1);
+}
+
+.whatwedo-row-text h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.whatwedo-row-text p {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .whatwedo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .whatwedo-visual img {
+    min-height: 260px;
+  }
+}
+
 /* ================= Filters ================= */
 .work-filters {
   display: flex;
@@ -108,28 +208,34 @@
   color: #06222a;
 }
 
-/* ================= Grid — 3 per row, smooth cards ================= */
+/* ================= Grid — image-only cards, 3 per row ================= */
 .work-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px;
+  gap: 26px;
 }
 
 .work-card {
+  display: block;
+  width: 100%;
   border-radius: 18px;
   background: var(--white);
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  padding: 0;
+  cursor: pointer;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.35s ease;
 }
 
-.work-card:hover {
+.work-card:hover,
+.work-card:focus-visible {
   transform: translateY(-8px);
   border-color: transparent;
   box-shadow: 0 22px 40px rgba(15, 23, 42, 0.14);
+  outline: none;
 }
 
 .work-media {
@@ -152,22 +258,11 @@
   transform: scale(1.08);
 }
 
-.work-media-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(6, 12, 20, 0.65) 0%, rgba(6, 12, 20, 0) 45%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.work-card:hover .work-media-overlay {
-  opacity: 1;
-}
-
+/* Tag badge sits directly over the image, top-left — no title/description below */
 .work-badge {
   position: absolute;
   left: 12px;
-  bottom: 12px;
+  top: 12px;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -177,7 +272,8 @@
   padding: 6px 12px;
   border-radius: 999px;
   color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 2;
 }
 
 .badge-graphic {
@@ -204,38 +300,97 @@
   background: #2563eb;
 }
 
-.work-body {
-  padding: 20px 22px 24px;
-}
-
-.work-body h3 {
-  font-size: 1.02rem;
-  font-weight: 700;
-}
-
-.work-body p {
-  margin-top: 8px;
-  font-size: 0.86rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.view-project {
-  display: inline-flex;
+.work-play-hint {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(6, 12, 20, 0.45);
+  backdrop-filter: blur(3px);
+  color: #fff;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 16px;
-  font-size: 0.83rem;
-  font-weight: 700;
-  color: var(--cyan);
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.view-project-arrow {
-  transition: transform 0.3s ease;
+.work-card:hover .work-play-hint {
+  opacity: 1;
 }
 
-.view-project:hover .view-project-arrow {
-  transform: translateX(4px);
+/* ================= Lightbox — full-size image/video view ================= */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4, 8, 14, 0.92);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 5vw, 48px);
+  animation: lightbox-fade 0.25s ease;
+}
+
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: rotate(90deg);
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: min(1100px, 92vw);
+  max-height: 88vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-media {
+  max-width: 100%;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+.lightbox-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
 }
 
 /* ================= Video showcase ================= */
@@ -412,20 +567,45 @@
   }
 }
 
-/* ================= Clients — continuous marquee ================= */
+/* ================= Clients — light card, continuous marquee ================= */
 .clients-section {
   padding: clamp(40px, 5vw, 60px) 0 clamp(56px, 7vw, 80px);
+  background: #eef1f5;
+}
+
+.clients-card-wrap {
+  background: #f7f9fb;
+  border: 1px solid #e7ebf0;
+  border-radius: 20px;
+  padding: clamp(28px, 4vw, 44px) clamp(16px, 4vw, 32px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
 .clients-header {
+  text-align: center;
   margin-bottom: 32px;
 }
 
 .clients-header h2 {
-  font-size: 1.5rem;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
   font-weight: 700;
-  color: var(--silver-bright);
-  margin-top: 8px;
+  color: #0f172a;
+}
+
+.clients-highlight {
+  position: relative;
+  color: #0f172a;
+}
+
+.clients-highlight::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 3px;
+  border-radius: 2px;
+  background: #4338ca;
 }
 
 .clients-marquee {
@@ -449,11 +629,10 @@
 
 .client-card {
   flex: 0 0 auto;
-  width: 170px;
-  height: 84px;
+  width: 150px;
+  height: 150px;
   border-radius: 12px;
-  background: #0a1620;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #e7ebf0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -462,7 +641,7 @@
 }
 
 .client-card:hover {
-  border-color: rgba(42, 212, 226, 0.45);
+  border-color: rgba(67, 56, 202, 0.35);
   transform: translateY(-3px);
 }
 
@@ -470,12 +649,6 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: grayscale(1) opacity(0.75);
-  transition: filter 0.25s ease;
-}
-
-.client-card:hover img {
-  filter: grayscale(0) opacity(1);
 }
 
 @keyframes clients-scroll {
@@ -492,7 +665,7 @@
 @media (max-width: 860px) {
   .work-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 22px;
+    gap: 20px;
   }
 }
 
@@ -510,8 +683,13 @@
   }
 
   .client-card {
-    width: 140px;
-    height: 72px;
+    width: 170px;
+    height: 90px;
+  }
+
+  .lightbox-close {
+    top: 12px;
+    right: 12px;
   }
 }
 

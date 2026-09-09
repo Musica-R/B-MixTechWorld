@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import CtaBand from '../components/CtaBand';
+import WorkFlipBook from '../components/Workflipbook';
 import "../style/Work.css"
 import video1 from "../assets/1.mp4"
 import video2 from "../assets/2.mp4"
@@ -19,7 +20,7 @@ import {
   FiSettings,
   FiMaximize,
 } from 'react-icons/fi';
-// import { BiBullhorn, BiDiamond } from 'react-icons/bi';
+
 
 /* ---------------- Data ---------------- */
 const FILTERS = [
@@ -41,17 +42,149 @@ const BADGE_META = {
   'Social Media': { className: 'badge-social', Icon: FiShare2 },
 };
 
+/* What-we-do strip copy — short line per service for the card above the flip book */
+const SERVICES = [
+  { key: 'Graphic Design', label: 'Graphic Design', note: 'Banners, posters & print-ready art', Icon: FiPenTool },
+  { key: 'Video Editing', label: 'Video Editing', note: 'Reels, promos & short-form cuts', Icon: FiVideo },
+  { key: 'Web Design', label: 'Web Design', note: 'Responsive sites & landing pages', Icon: FiMonitor },
+  { key: 'Digital Marketing', label: 'Digital Marketing', note: 'Campaigns that build reach', Icon: FiShare2 },
+];
+
 const PROJECTS = [
-  { tag: 'Graphic Design', title: 'Photo Frame Design', note: 'Framed presentation style for keepsake photos', img: 'assets/1.jpeg' },
-  { tag: 'Social Media', title: 'Social Media Post Design', note: 'On-brand post templates for daily social content', img: 'assets/2.jpeg' },
-  { tag: 'Graphic Design', title: 'Poster Design', note: 'Print-ready poster layout for a local event', img: 'assets/3.jpeg' },
-  { tag: 'Graphic Design', title: 'Banner Design', note: 'Wide banner design for a retail launch', img: 'assets/4.jpeg' },
-  { tag: 'Branding', title: 'Business Card Design', note: 'Compact identity card design for print', img: 'assets/5.jpeg' },
-  { tag: 'Branding', title: 'Logo Design', note: 'Mark and wordmark design for brand identity', img: 'assets/10.jpeg' },
-  { tag: 'Video Editing', title: 'Video Editing — Reel 01', note: 'Short-form edit for social reach', img: 'assets/1.jpeg', src: video1 },
-  { tag: 'Video Editing', title: 'Video Editing — Reel 02', note: 'Promo cut with motion titles', img: 'assets/2.jpeg', src: video2 },
-  { tag: 'Web Design', title: 'B-MixTechWorld', note: 'Modern, responsive website for local business', img: 'assets/logo.png' },
-  { tag: 'Digital Marketing', title: 'Social Media Campaign', note: 'Strategy and creatives for brand awareness campaign', img: 'assets/logo.png' },
+  {
+    tag: 'Graphic Design',
+    title: 'Banner Design',
+    note: 'A clean and visually engaging banner design developed for a retail launch, focusing on strong visual hierarchy, clear communication, attractive typography, and a balanced composition. The design is structured to immediately capture attention while presenting the key promotional message in a clean and professional format suitable for both digital platforms and print applications.',
+    img: 'assets/4.jpeg',
+    client: 'INNSTORE',
+    service: 'Graphic Design',
+    format: 'Banner (Social Media / Print)',
+    platform: 'Web & Print',
+    year: '2025',
+    status: 'Completed',
+  
+  },
+
+  {
+    tag: 'Branding',
+    title: 'Business Card Design',
+    note: 'Professional business card design created to provide a strong and memorable first impression while maintaining a clean and modern brand identity. The layout carefully combines typography, contact information, branding elements, spacing, and visual balance to ensure that every important detail is easy to read and presented in a polished format suitable for professional networking and high-quality printing.',
+    img: 'assets/5.jpeg',
+    client: 'General / Print Client',
+    service: 'Branding',
+    format: 'Business Card (Print)',
+    platform: 'Print',
+    year: '2025',
+    status: 'Completed',
+  
+  },
+
+  {
+    tag: 'Branding',
+    title: 'Logo Design',
+    note: 'Custom logo design developed to establish a distinctive and recognizable visual identity for a brand. The concept focuses on creating a simple yet meaningful mark that communicates the personality and values of the business while remaining versatile across websites, social media, printed materials, advertisements, packaging, and other brand communication platforms.',
+    img: 'assets/10.jpeg',
+    client: 'Maha Beauty Care',
+    service: 'Branding',
+    format: 'Logo (Mark & Wordmark)',
+    platform: 'Print & Digital',
+    year: '2025',
+    status: 'Completed',
+   
+  },
+
+  {
+    tag: 'Graphic Design',
+    title: 'Photo Frame Design',
+    note: 'Creative photo frame design created to present personal and memorable photographs in an attractive and visually refined format. The composition combines decorative elements, balanced spacing, typography, and imagery to create an elegant presentation while keeping the photograph as the primary visual focus. The design can be adapted for personal memories, celebrations, events, gifts, and promotional purposes.',
+    img: 'assets/1.jpeg',
+    client: 'Personal / Event Client',
+    service: 'Graphic Design',
+    format: 'Photo Frame (Print)',
+    platform: 'Print',
+    year: '2025',
+    status: 'Completed',
+  },
+
+  {
+    tag: 'Social Media',
+    title: 'Social Media Post Design',
+    note: 'Engaging social media post designs created to help brands communicate their message effectively across digital platforms. Each design focuses on attractive visuals, readable typography, consistent branding, strong composition, and clear messaging to improve audience attention and engagement. The layouts are designed to work effectively for promotional content, announcements, campaigns, offers, and regular brand communication.',
+    img: 'assets/2.jpeg',
+    client: 'Multiple Brands',
+    service: 'Social Media Design',
+    format: 'Post Templates',
+    platform: 'Instagram / Facebook',
+    year: '2025',
+    status: 'Ongoing',
+  },
+
+  {
+    tag: 'Graphic Design',
+    title: 'Poster Design',
+    note: 'Eye-catching poster design developed for a local event with a strong focus on visual impact and clear information presentation. The design combines typography, imagery, spacing, hierarchy, and supporting graphic elements to make the important event details easy to understand at a glance while maintaining an attractive and professional appearance suitable for both digital promotion and high-quality printing.',
+    img: 'assets/3.jpeg',
+    client: 'Local Event',
+    service: 'Graphic Design',
+    format: 'Poster (Print)',
+    platform: 'Print & Digital',
+    year: '2025',
+    status: 'Completed',
+  },
+
+  {
+    tag: 'Video Editing',
+    title: 'Video Editing — Reel 01',
+    note: 'Short-form video editing project created specifically for social media engagement and audience reach. The edit focuses on maintaining a smooth visual flow through carefully selected cuts, timing, transitions, music synchronization, text elements, and visual enhancements. The overall approach is designed to keep the content engaging from the opening moment through the final frame while presenting the original footage in a polished and professional format.',
+    img: 'assets/1.jpeg',
+    src: video1,
+    client: 'Social Media Client',
+    service: 'Video Editing',
+    format: 'Short-form Reel',
+    platform: 'Instagram / YouTube Shorts',
+    year: '2025',
+    status: 'Completed',
+  },
+
+  {
+    tag: 'Video Editing',
+    title: 'Video Editing — Reel 02',
+    note: 'Promotional video edit developed with a combination of dynamic cuts, motion titles, visual transitions, timing, and supporting effects to create an engaging viewing experience. The editing approach focuses on communicating the promotional message clearly while maintaining a modern visual style suitable for social media platforms, digital campaigns, advertisements, and short promotional content.',
+    img: 'assets/2.jpeg',
+    src: video2,
+    client: 'Promotional Client',
+    service: 'Video Editing',
+    format: 'Promo Video',
+    platform: 'Social Media',
+    year: '2025',
+    status: 'Completed',
+  },
+
+  {
+    tag: 'Web Design',
+    title: 'B-MixTechWorld',
+    note: 'Modern and responsive website design created for a local business with a focus on professional presentation, simple navigation, strong visual hierarchy, and a smooth user experience. The interface is designed to work effectively across desktop and mobile devices while presenting the company, services, and important information in an organized and visually appealing manner. The overall design combines contemporary layouts, responsive elements, clean typography, and consistent branding to create a professional online presence.',
+    img: 'assets/logo.png',
+    client: 'B-MixTechWorld',
+    service: 'Web Design & Development',
+    format: 'Responsive Website',
+    platform: 'Web (Desktop & Mobile)',
+    year: '2025',
+    status: 'Completed',
+  },
+
+  {
+    tag: 'Digital Marketing',
+    title: 'Social Media Campaign',
+    note: 'Digital marketing campaign developed to improve brand awareness and create a consistent presence across social media platforms. The campaign combines strategic content planning, creative social media designs, promotional messaging, audience-focused communication, and consistent visual branding. The objective is to strengthen the brand identity, attract attention from the target audience, encourage engagement, and build a stronger digital presence through regular and purposeful content.',
+    img: 'assets/logo.png',
+    client: 'Multiple Brands',
+    service: 'Digital Marketing',
+    format: 'Campaign Strategy & Creatives',
+    platform: 'Social Media',
+    year: '2025',
+    status: 'Ongoing',
+  }
 ];
 
 const FEATURED_VIDEOS = [
@@ -62,8 +195,8 @@ const FEATURED_VIDEOS = [
 ];
 
 const BRANDS = [
-  { name: 'Innstore', logo: 'assets/brand2.jpeg' },
-  { name: 'Maha', logo: 'assets/11.jpeg' },
+  { name: 'Innstore', logo: 'assets/inn.png' },
+  { name: 'Maha', logo: 'assets/10.jpeg' },
   { name: 'GTM Vanjaram Pickle', logo: 'assets/brand1.jpeg' },
   { name: 'Sri Karpagam Nanbar Kulu', logo: 'assets/logo.png' },
 ];
@@ -79,7 +212,15 @@ export default function Work() {
   const [filter, setFilter] = useState('All');
   const visible = filter === 'All' ? PROJECTS : PROJECTS.filter((p) => p.tag === filter);
 
-  /* Featured video player state */
+  // Attach each project's badge color/icon so the flip-book pages can render
+  // the same category badge the grid cards used to show.
+  const flipItems = visible.map((p) => ({
+    ...p,
+    badgeClass: BADGE_META[p.tag].className,
+    BadgeIcon: BADGE_META[p.tag].Icon,
+  }));
+
+  /* Featured video player state (unchanged — original player/playlist) */
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -144,7 +285,39 @@ export default function Work() {
         </div>
       </section>
 
-      {/* ---------------- Filters + Grid ---------------- */}
+      {/* ---------------- What We Do — light card, image left / list right ---------------- */}
+      <section className="section whatwedo-section">
+        <div className="wrap">
+          <div className="whatwedo-card-wrap">
+            <div className="whatwedo-grid">
+              <div className="whatwedo-visual">
+                <img
+                  src="https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=900&q=70"
+                  alt="Creative design and branding workspace"
+                />
+              </div>
+              <div className="whatwedo-list-col">
+                <span className="eyebrow-line eyebrow-dark">WHAT WE DO</span>
+                <h2>Some of Our <span className="work-header-highlight">Creative Services</span></h2>
+                <div className="whatwedo-list">
+                  {SERVICES.map(({ key, label, note, Icon }) => (
+                    <div className="whatwedo-row" key={key}>
+                      <span className="whatwedo-icon">
+                        <Icon size={18} />
+                      </span>
+                      <div className="whatwedo-row-text">
+                        <h4>{label}</h4>
+                        <p>{note}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="section work-section">
         <div className="wrap">
           <div className="work-filters" role="tablist" aria-label="Filter work by category">
@@ -161,34 +334,11 @@ export default function Work() {
             ))}
           </div>
 
-          <div className="work-grid">
-            {visible.map((p) => {
-              const meta = BADGE_META[p.tag];
-              const BadgeIcon = meta.Icon;
-              return (
-                <article className="work-card" key={p.title}>
-                  <div className="work-media">
-                    <img src={p.img} alt={p.title} loading="lazy" />
-                    <div className="work-media-overlay" />
-                    <span className={`work-badge ${meta.className}`}>
-                      <BadgeIcon size={12} /> {p.tag}
-                    </span>
-                  </div>
-                  <div className="work-body">
-                    <h3>{p.title}</h3>
-                    <p>{p.note}</p>
-                    <a href="#" className="view-project">
-                      View Project <FiArrowRight className="view-project-arrow" />
-                    </a>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+          <WorkFlipBook items={flipItems} />
         </div>
       </section>
 
-      {/* ---------------- Featured video + playlist ---------------- */}
+      {/* ---------------- Featured video + playlist (unchanged) ---------------- */}
       <section className="band-dark on-dark video-showcase">
         <div className="wrap">
           <div className="video-showcase-grid">
@@ -259,27 +409,25 @@ export default function Work() {
         </div>
       </section>
 
-      {/* ---------------- Clients — continuous marquee ---------------- */}
-      <section className="band-dark on-dark clients-section">
-        <div className="wrap clients-header">
-          <span className="eyebrow-line">OUR CLIENTS</span>
-          <h2>Trusted by <span className="work-header-highlight">Amazing Brands</span></h2>
-        </div>
-        <div className="clients-marquee">
-          <div className="clients-track">
-            {[...BRANDS, ...BRANDS].map((b, i) => (
-              <div className="client-card" key={`${b.name}-${i}`}>
-                <img src={b.logo} alt={b.name} loading="lazy" />
+      {/* ---------------- Clients — light card, continuous marquee ---------------- */}
+      <section className="clients-section">
+        <div className="wrap">
+          <div className="clients-card-wrap">
+            <div className="clients-header">
+              <h2>Some of our <span className="clients-highlight">valuable clients</span></h2>
+            </div>
+            <div className="clients-marquee">
+              <div className="clients-track">
+                {[...BRANDS, ...BRANDS].map((b, i) => (
+                  <div className="client-card" key={`${b.name}-${i}`}>
+                    <img src={b.logo} alt={b.name} loading="lazy" />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
-
-      <CtaBand
-        title="Let's Create Something Amazing Together"
-        note="Your ideas deserve the right design, the right strategy and the right team."
-      />
     </>
   );
 }

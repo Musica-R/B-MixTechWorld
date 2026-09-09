@@ -1,79 +1,58 @@
 import "../style/homeabout.css";
+import ab from "../assets/abt.jpg"
+
+const ABOUT_BADGES = [
+  {
+    className: "badge-top",
+    title: "Custom Development",
+    sub: "Web • Video • Design",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M8 6 3 12l5 6M16 6l5 6-5 6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    className: "badge-bottom",
+    title: "Digital Transformation",
+    sub: "Modernize • Automate • Grow",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M7 18a4.5 4.5 0 0 1-.4-8.98A5.5 5.5 0 0 1 17.2 8.1 4 4 0 0 1 17 16H7Z" strokeLinejoin="round" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+];
 
 const ABOUT_FEATURES = [
   {
-    title: "Every project — site, poster, or campaign",
-    desc: "comes from one person, start to finish.",
+    title: "Collaborative approach",
+    desc: "We work as an extension of your team, keeping communication clear and progress transparent.",
     icon: (
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect x="3" y="4" width="18" height="12" rx="1.5" />
-        <path d="M8 20h8M12 16v4" strokeLinecap="round" />
+        <circle cx="8.5" cy="8" r="2.6" />
+        <circle cx="16" cy="9" r="2.1" />
+        <path d="M2.5 19c0-3 2.7-5.4 6-5.4s6 2.4 6 5.4M15 13.6c2.7.3 4.8 2.3 4.8 4.7" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    title: "Simple, static builds",
-    desc: "that stay easy to update without a developer on retainer.",
+    title: "Tailored solutions",
+    desc: "Every business is unique. We build custom solutions that fit your goals, not just templates.",
     icon: (
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" strokeLinejoin="round" strokeLinecap="round" />
+        <path d="M9 18h6M10 21h4M7.5 9.5a4.5 4.5 0 1 1 9 0c0 2-1.2 3-2 4-.6.7-.9 1.3-.9 2.2h-3.2c0-.9-.3-1.5-.9-2.2-.8-1-2-2-2-4Z" strokeLinejoin="round" />
       </svg>
     ),
   },
-  {
-    title: "Based in Salem",
-    desc: "— easy to call, meet, or follow up with in person.",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="12" cy="8" r="3.4" />
-        <path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7" strokeLinecap="round" />
-      </svg>
-    ),
-  },
+
 ];
 
-const ABOUT_STATS = [
-  {
-    num: "3+",
-    label: "Years freelancing in Salem",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <circle cx="9" cy="8" r="3" />
-        <path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6" strokeLinecap="round" />
-        <path d="M16 4.2c1.5.4 2.6 1.7 2.6 3.3 0 1.6-1.1 2.9-2.6 3.3M19 20c0-2.8-1.9-5.1-4.5-5.8" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    num: "20+",
-    label: "Sites, posters & campaigns built",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M3 7a1.5 1.5 0 0 1 1.5-1.5H9L11 8h9.5A1.5 1.5 0 0 1 22 9.5V18a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18V7Z" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    num: "1",
-    label: "Person you talk to, start to finish",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <path d="M4 4h16v11H9l-4 4V4Z" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-];
+
 
 export default function Homeabout() {
   return (
     <section className="about-hero">
-      <div className="about-hero-wave" aria-hidden="true">
-        <svg viewBox="0 0 1600 220" preserveAspectRatio="none">
-          <path d="M0,120 C300,200 500,40 850,90 C1150,135 1350,60 1600,110 L1600,220 L0,220 Z" fill="#dceef3" />
-          <path d="M0,150 C280,90 560,190 900,140 C1200,95 1400,170 1600,150 L1600,220 L0,220 Z" fill="#2c5b78" opacity="0.9" />
-        </svg>
-      </div>
-
       <div className="wrap about-hero-grid">
         {/* Visual side */}
         <div className="about-visual">
@@ -85,38 +64,31 @@ export default function Homeabout() {
 
           <div className="about-visual-primary">
             <img
-              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=70"
+              src={ab}
               alt="Team collaborating in a modern office"
               loading="lazy"
             />
-            <span className="about-visual-caption">Ideas<br />Build<br />Tomorrow</span>
           </div>
 
           <div className="about-visual-secondary">
             <img
-              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=70"
-              alt="Laptop showing code on a desk"
+              src="/assets/dg.jpg"
+              alt="Developer reviewing code on a monitor"
               loading="lazy"
             />
-            <div className="about-visual-pill">
-              <span className="pill-icon">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M8 6 3 12l5 6M16 6l5 6-5 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <span>Modern Solutions<br />for Your Business</span>
-            </div>
           </div>
 
-          <div className="about-visual-badge">
-            <div className="badge-logo-row">
-              <span className="badge-logo-mark">BM</span>
-              <span className="badge-logo-text">
-                B-Mix<b>TechWorld</b>
+          {ABOUT_BADGES.map((b) => (
+            <div className={`about-badge ${b.className}`} key={b.title}>
+              <span className="badge-icon">{b.icon}</span>
+              <span className="badge-copy">
+                <strong>{b.title}</strong>
+                <em>{b.sub}</em>
               </span>
             </div>
-            <span className="badge-tagline">Design • Develop • Deliver</span>
-          </div>
+          ))}
+          <span className="badge-lead badge-lead-top" aria-hidden="true" />
+          <span className="badge-lead badge-lead-bottom" aria-hidden="true" />
         </div>
 
         {/* Copy side */}
@@ -126,13 +98,14 @@ export default function Homeabout() {
           </span>
           <h2>
             One person, every<br />
-            step of the <span className="text-gradient">build.</span>
+            step of the build.
           </h2>
           <p>
-            B-MixTechWorld is Balamurugan's one-person studio, based in Salem,
-            Tamil Nadu. There's no hand-off between departments — the person
-            who plans your website is the same one who designs it, builds it,
-            and edits your next promotional video.
+            We're a team of problem solvers, creators and technologists who
+            turn ideas into powerful digital solutions. From strategy to
+            deployment, we work closely with you at every stage — combining
+            creativity, technology and real-world experience to build
+            products that make a difference.
           </p>
 
           <ul className="about-features">
@@ -147,25 +120,9 @@ export default function Homeabout() {
               </li>
             ))}
           </ul>
-
-          <span className="about-scribble">Small team<br />Big ideas</span>
         </div>
       </div>
 
-      <div className="wrap">
-        <div className="about-stats-bar">
-          {ABOUT_STATS.map((s, i) => (
-            <div className="about-stat" key={s.label}>
-              {i !== 0 && <span className="stat-divider" />}
-              <span className="stat-icon">{s.icon}</span>
-              <div>
-                <span className="stat-num">{s.num}</span>
-                <span className="stat-label">{s.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }

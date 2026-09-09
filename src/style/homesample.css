@@ -10,9 +10,7 @@
   --fw-muted: #94a3b8;
 
   position: relative;
-  background:
-    linear-gradient(180deg, rgba(5, 13, 26, 0.88), rgba(5, 13, 26, 0.96)),
-    url("../assets/bg.png") center / cover no-repeat;
+  background: url("../assets/back2.png") center / cover no-repeat;
   padding: clamp(60px, 8vw, 110px) 0;
   color: var(--fw-text);
   overflow: hidden;
