@@ -1,0 +1,431 @@
+/* ================= Flip-book color combo ================= */
+:root {
+  --sn-cyan: #10737a;
+  --sn-cyan-soft: rgba(16, 115, 122, 0.10);
+  --sn-cyan-line: rgba(16, 115, 122, 0.35);
+  --sn-text: #142229;
+  --sn-heading: #16324a;
+  --sn-muted: rgba(20, 34, 41, 0.62);
+  --sn-line: rgba(20, 34, 41, 0.10);
+  /* paper / grey tone, not pure white */
+  --sn-page-bg: #eeece6;
+  --sn-image-bg: #e6e4dd;
+  --sn-ok: #10737a;
+  --sn-ongoing: #b45309;
+}
+
+/* ================= Real 3D stage ================= */
+.flipbook-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.flipbook-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2400px;
+  perspective-origin: 50% 40%;
+  overflow: hidden;
+}
+
+.work-flipbook {
+  border-radius: 4px;
+  transform-style: preserve-3d;
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.10),
+    0 24px 48px rgba(15, 23, 42, 0.16),
+    0 60px 90px rgba(15, 23, 42, 0.14);
+}
+
+.flipbook-ground-shadow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  bottom: -22px;
+  height: 34px;
+  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0) 72%);
+  filter: blur(2px);
+  z-index: -1;
+}
+
+/* ---- page shell ---- */
+.flip-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+/* ---- curved paper-fold spine shadow ---- */
+.flip-page-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.flip-page-spine--right {
+  right: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.04) 40%,
+    rgba(0, 0, 0, 0.12) 70%,
+    rgba(0, 0, 0, 0.30) 92%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+}
+
+.flip-page-spine--left {
+  left: 0;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.06) 40%,
+    rgba(0, 0, 0, 0.18) 70%,
+    rgba(0, 0, 0, 0.38) 92%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+.flip-page-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(16, 115, 122, 0.16) 51%,
+    rgba(16, 115, 122, 0.06) 65%,
+    transparent 66%
+  );
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* ================= Odd page: rich project-detail layout ================= */
+.flip-page--text {
+  background: var(--sn-page-bg);
+  color: var(--sn-text);
+}
+
+.flip-page--text .flip-page-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 24px 22px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sn-cyan-line) transparent;
+}
+
+.flip-page--text .flip-page-inner::-webkit-scrollbar {
+  width: 5px;
+}
+
+.flip-page--text .flip-page-inner::-webkit-scrollbar-thumb {
+  background: var(--sn-cyan-line);
+  border-radius: 999px;
+}
+
+/* header: big faint index number + short rule, like the reference */
+.flip-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.flip-page--text .flip-page-index {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--sn-cyan-line);
+  line-height: 1;
+}
+
+.flip-detail-rule {
+  width: 34px;
+  height: 2px;
+  background: var(--sn-cyan-line);
+  border-radius: 2px;
+}
+
+.flip-page--text .flip-page-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 16px;
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--sn-cyan-soft);
+  color: var(--sn-cyan);
+}
+
+.flip-page--text .flip-page-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin-top: 12px;
+  color: var(--sn-heading);
+}
+
+.flip-page--text .flip-page-note {
+  margin-top: 10px;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--sn-muted);
+}
+
+.flip-detail-divider {
+  display: block;
+  height: 1px;
+  background: var(--sn-line);
+  margin: 18px 0 14px;
+}
+
+.flip-detail-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--sn-heading);
+  margin-bottom: 12px;
+}
+
+.flip-detail-heading-bar {
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--sn-cyan);
+}
+
+/* project details list */
+.flip-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.flip-detail-row {
+  display: grid;
+  grid-template-columns: 106px 12px 1fr;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.flip-detail-row dt {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--sn-muted);
+  font-weight: 500;
+}
+
+.flip-detail-colon {
+  color: var(--sn-muted);
+}
+
+.flip-detail-row dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--sn-heading);
+}
+
+.flip-status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.flip-status-pill.is-done {
+  background: var(--sn-cyan-soft);
+  color: var(--sn-ok);
+}
+
+.flip-status-pill.is-ongoing {
+  background: rgba(180, 83, 9, 0.12);
+  color: var(--sn-ongoing);
+}
+
+/* design focus: three checkmarked points */
+.flip-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.flip-focus-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.flip-focus-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--sn-cyan);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.flip-focus-item h5 {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--sn-heading);
+  line-height: 1.3;
+}
+
+.flip-focus-item p {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--sn-muted);
+}
+
+/* CTA button */
+.flip-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 11px 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--sn-cyan);
+  border-radius: 8px;
+  width: fit-content;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flip-view-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(16, 115, 122, 0.28);
+}
+
+/* ================= Even page: full image/video, static ================= */
+.flip-page--image {
+  background: var(--sn-image-bg);
+}
+
+.flip-page-media--full {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
+.flip-page-media-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: var(--sn-image-bg);
+}
+
+.flip-page-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ---- prev / next controls ---- */
+.flipbook-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.flipbook-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--sn-cyan);
+  background: var(--sn-cyan-soft);
+  border: 1px solid var(--sn-cyan-line);
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.flipbook-nav-btn:hover {
+  background: var(--sn-cyan);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.flipbook-hint {
+  font-size: 0.78rem;
+  color: var(--sn-muted);
+}
+
+@media (max-width: 560px) {
+  .flip-page--text .flip-page-inner {
+    padding: 20px 16px 18px;
+  }
+
+  .flip-page--text .flip-page-index {
+    font-size: 1.5rem;
+  }
+
+  .flip-page--text .flip-page-title {
+    font-size: 1.2rem;
+  }
+
+  .flip-detail-row {
+    grid-template-columns: 88px 10px 1fr;
+    font-size: 0.76rem;
+  }
+
+  .flip-focus-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .flip-page-spine {
+    width: 34px;
+  }
+
+  .flipbook-wrap {
+    perspective: 1400px;
+  }
+}

@@ -1,0 +1,40 @@
+.cta-band {
+  padding: clamp(56px, 8vw, 84px) 0;
+  background: radial-gradient(ellipse at 85% 100%, rgba(242, 161, 58, 0.14), transparent 55%), var(--black);
+}
+
+.cta-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.cta-band h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  color: var(--silver-bright);
+  font-weight: 700;
+  max-width: 20ch;
+}
+
+.cta-band p {
+  color: var(--silver);
+  margin-top: 10px;
+  max-width: 42ch;
+}
+
+.cta-band-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 620px) {
+  .cta-band-inner { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 420px) {
+  .cta-band-actions { width: 100%; flex-direction: column; }
+  .cta-band-actions .btn { width: 100%; justify-content: center; }
+}

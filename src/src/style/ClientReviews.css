@@ -1,0 +1,137 @@
+.reviews-section {
+  --rv-bg: #0a1626;
+  --rv-cyan: #22d3ee;
+  --rv-border: rgba(34, 211, 238, 0.16);
+  --rv-text: #f1f5f9;
+  --rv-muted: #94a3b8;
+
+  background: var(--rv-bg);
+  color: var(--rv-text);
+  padding: clamp(60px, 8vw, 100px) 0;
+}
+
+.reviews-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.reviews-head .eyebrow-line {
+  color: var(--rv-cyan);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reviews-head h2 {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  margin-top: 10px;
+}
+
+.reviews-head .metal-text {
+  color: var(--rv-cyan);
+}
+
+.reviews-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.reviews-nav .carousel-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--rv-border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--rv-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.reviews-nav .carousel-arrow:hover {
+  background: var(--rv-cyan);
+  color: var(--rv-bg);
+}
+
+.reviews-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.review-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--rv-border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0.55;
+  transform: scale(0.97);
+  transition: all 0.3s ease;
+}
+
+.review-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--rv-cyan);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+}
+
+.review-stars {
+  display: flex;
+  gap: 3px;
+}
+
+.star-filled {
+  color: var(--rv-cyan);
+}
+
+.star-empty {
+  color: rgba(148, 163, 184, 0.3);
+}
+
+.review-quote {
+  color: var(--rv-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.review-author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid var(--rv-border);
+  padding-top: 12px;
+}
+
+.review-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--rv-text);
+}
+
+.review-role {
+  font-size: 0.82rem;
+  color: var(--rv-muted);
+}
+
+@media (max-width: 1000px) {
+  .reviews-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews-track {
+    grid-template-columns: 1fr;
+  }
+}
